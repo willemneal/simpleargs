@@ -3,7 +3,7 @@ from string import capitalize
 import sys
 from simpleargs import argv
 
-def decorateClass(cls):
+def argWrapper(cls):
     '''
     This method wraps around a class and extracts properties from it.
     These properties are then set if they are found in the arguments passed it.
@@ -33,7 +33,7 @@ def decorateClass(cls):
         sys.exit(-1)
     return cls
 
-@decorateClass
+@argWrapper
 class Foo(object):
     '''This is the Foo doc'''
     name = "Willem"
