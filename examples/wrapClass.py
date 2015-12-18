@@ -17,23 +17,19 @@ def decorateClass(cls):
                   if name.startswith("set")}
     #each method object has a docstring, this can be used to make a man page.
     helpDoc = cls.__doc__ + "\nArguments:\n\t" + "\n\t".join(method.__doc__ for method in setMethods.values())
+    #check if help was requested
     if "help" in argDic.keys():
         print helpDoc
         sys.exit(0)
     try:
         for arg, value in argDic.items():
-            #setmethod = "set"+capitalize(key)
             if arg in setMethods:
                 setMethods[arg](value)
             else:
                 print "Argument {} not defined".format(arg)
                 sys.exit(-1)
-    except SystemExit:
-        print "Try: "+cls.__name__ +" --help"
-        sys.exit(-1)
     except:
         print "Try: "+cls.__name__ +" --help"
-        print   "Unexpected error:", sys.exc_info()[0]
         sys.exit(-1)
     return cls
 
